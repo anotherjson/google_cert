@@ -1,25 +1,28 @@
 # intro
 
 ## setup enviroment
-### install packages
+### install packages and set directories
 ```{r}
+# install packages
 library(lubridate)
 library(tidyverse)
+
+# set dir
+current_dir <- getwd()
+project_dir <- current_dir %>% 
+  str_replace("src", "")
+data_dir <- paste(project_dir, "data/", sep = "")
 ```
-### setup pathing
-```{r}
-current_directory <- getwd()
-#project_wor
-data_directory <- paste(current_directory, "data", sep = "")
-print(current_directory)
-print(data_directory)
-```
+
 # preparing the data
 
 ## data sources
 ### import data
 ```{r}
-#read.csv()
+data_weight <- read.csv(paste(data_dir, "weightLogInfo_merged.csv", sep = ""))
+glimpse(data_weight)
+head(data_weight)
+tail(data_weight)
 ```
 
 ## data quality
