@@ -1,0 +1,25 @@
+# intro
+
+## setup enviroment
+### install packages
+```{r}
+library(lubridate)
+library(tidyverse)
+```
+### setup pathing
+```{r}
+current_directory <- getwd()
+#project_wor
+data_directory <- paste(current_directory, "data", sep = "")
+print(current_directory)
+print(data_directory)
+```
+# preparing the data
+
+## data sources
+### import data
+```{r}
+#read.csv()
+```
+
+## data quality
