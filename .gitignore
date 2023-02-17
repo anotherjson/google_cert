@@ -2,6 +2,8 @@
 .DS_Store
 # project stuff
 data/
+# ignore reference folder
+reference/
 # History files
 .Rhistory
 .Rapp.history
