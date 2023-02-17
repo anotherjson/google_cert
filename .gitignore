@@ -40,3 +40,5 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 google_cert.Rproj
+# ignore renv
+renv/
