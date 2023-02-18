@@ -394,47 +394,25 @@ data_dir &lt;- paste(project_dir, &quot;data/&quot;, sep = &quot;&quot;)</code><
 <h2>data sources</h2>
 <div id="import-data" class="section level3">
 <h3>import data</h3>
-<pre class="r"><code>data_weight &lt;- read.csv(paste(data_dir, &quot;weightLogInfo_merged.csv&quot;, sep = &quot;&quot;))
-str(data_weight)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    67 obs. of  8 variables:
-##  $ Id            : num  1.50e+09 1.50e+09 1.93e+09 2.87e+09 2.87e+09 ...
-##  $ Date          : chr  &quot;5/2/2016 11:59:59 PM&quot; &quot;5/3/2016 11:59:59 PM&quot; &quot;4/13/2016 1:08:52 AM&quot; &quot;4/21/2016 11:59:59 PM&quot; ...
-##  $ WeightKg      : num  52.6 52.6 133.5 56.7 57.3 ...
-##  $ WeightPounds  : num  116 116 294 125 126 ...
-##  $ Fat           : int  22 NA NA NA NA 25 NA NA NA NA ...
-##  $ BMI           : num  22.6 22.6 47.5 21.5 21.7 ...
-##  $ IsManualReport: chr  &quot;True&quot; &quot;True&quot; &quot;False&quot; &quot;True&quot; ...
-##  $ LogId         : num  1.46e+12 1.46e+12 1.46e+12 1.46e+12 1.46e+12 ...</code></pre>
-<pre class="r"><code>head(data_weight)</code></pre>
-<pre><code>##           Id                  Date WeightKg WeightPounds Fat   BMI
-## 1 1503960366  5/2/2016 11:59:59 PM     52.6     115.9631  22 22.65
-## 2 1503960366  5/3/2016 11:59:59 PM     52.6     115.9631  NA 22.65
-## 3 1927972279  4/13/2016 1:08:52 AM    133.5     294.3171  NA 47.54
-## 4 2873212765 4/21/2016 11:59:59 PM     56.7     125.0021  NA 21.45
-## 5 2873212765 5/12/2016 11:59:59 PM     57.3     126.3249  NA 21.69
-## 6 4319703577 4/17/2016 11:59:59 PM     72.4     159.6147  25 27.45
-##   IsManualReport        LogId
-## 1           True 1.462234e+12
-## 2           True 1.462320e+12
-## 3          False 1.460510e+12
-## 4           True 1.461283e+12
-## 5           True 1.463098e+12
-## 6           True 1.460938e+12</code></pre>
-<pre class="r"><code>tail(data_weight)</code></pre>
-<pre><code>##            Id                 Date WeightKg WeightPounds Fat   BMI
-## 62 8877689391  5/4/2016 6:48:22 AM     84.4     186.0702  NA 25.26
-## 63 8877689391  5/6/2016 6:43:35 AM     85.0     187.3929  NA 25.44
-## 64 8877689391  5/8/2016 7:35:53 AM     85.4     188.2748  NA 25.56
-## 65 8877689391  5/9/2016 6:39:44 AM     85.5     188.4952  NA 25.61
-## 66 8877689391 5/11/2016 6:51:47 AM     85.4     188.2748  NA 25.56
-## 67 8877689391 5/12/2016 6:42:53 AM     84.0     185.1883  NA 25.14
-##    IsManualReport        LogId
-## 62          False 1.462345e+12
-## 63          False 1.462517e+12
-## 64          False 1.462693e+12
-## 65          False 1.462776e+12
-## 66          False 1.462950e+12
-## 67          False 1.463035e+12</code></pre>
+<pre class="r"><code>data_weight &lt;- read_csv(paste(data_dir, &quot;weightLogInfo_merged.csv&quot;, sep = &quot;&quot;))</code></pre>
+<pre><code>## Rows: 67 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): Date
+## dbl (6): Id, WeightKg, WeightPounds, Fat, BMI, LogId
+## lgl (1): IsManualReport
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>data_sleep &lt;- read_csv(paste(data_dir, &quot;sleepDay_merged.csv&quot;, sep = &quot;&quot;))</code></pre>
+<pre><code>## Rows: 413 Columns: 5
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): SleepDay
+## dbl (4): Id, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>glimpse(data_weight)</code></pre>
 <pre><code>## Rows: 67
 ## Columns: 8
@@ -442,10 +420,18 @@ str(data_weight)</code></pre>
 ## $ Date           &lt;chr&gt; &quot;5/2/2016 11:59:59 PM&quot;, &quot;5/3/2016 11:59:59 PM&quot;, &quot;4/13/2…
 ## $ WeightKg       &lt;dbl&gt; 52.6, 52.6, 133.5, 56.7, 57.3, 72.4, 72.3, 69.7, 70.3, …
 ## $ WeightPounds   &lt;dbl&gt; 115.9631, 115.9631, 294.3171, 125.0021, 126.3249, 159.6…
-## $ Fat            &lt;int&gt; 22, NA, NA, NA, NA, 25, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ Fat            &lt;dbl&gt; 22, NA, NA, NA, NA, 25, NA, NA, NA, NA, NA, NA, NA, NA,…
 ## $ BMI            &lt;dbl&gt; 22.65, 22.65, 47.54, 21.45, 21.69, 27.45, 27.38, 27.25,…
-## $ IsManualReport &lt;chr&gt; &quot;True&quot;, &quot;True&quot;, &quot;False&quot;, &quot;True&quot;, &quot;True&quot;, &quot;True&quot;, &quot;True&quot;…
+## $ IsManualReport &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, …
 ## $ LogId          &lt;dbl&gt; 1.462234e+12, 1.462320e+12, 1.460510e+12, 1.461283e+12,…</code></pre>
+<pre class="r"><code>glimpse(data_sleep)</code></pre>
+<pre><code>## Rows: 413
+## Columns: 5
+## $ Id                 &lt;dbl&gt; 1503960366, 1503960366, 1503960366, 1503960366, 150…
+## $ SleepDay           &lt;chr&gt; &quot;4/12/2016 12:00:00 AM&quot;, &quot;4/13/2016 12:00:00 AM&quot;, &quot;…
+## $ TotalSleepRecords  &lt;dbl&gt; 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ TotalMinutesAsleep &lt;dbl&gt; 327, 384, 412, 340, 700, 304, 360, 325, 361, 430, 2…
+## $ TotalTimeInBed     &lt;dbl&gt; 346, 407, 442, 367, 712, 320, 377, 364, 384, 449, 3…</code></pre>
 </div>
 </div>
 <div id="data-quality" class="section level2">

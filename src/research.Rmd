@@ -1,28 +1,36 @@
 # intro
 
 ## setup enviroment
-### install packages and set directories
-```{r}
+```{r setup}
+# set directory for chunks
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+
 # install packages
+library(data.table)
 library(lubridate)
 library(tidyverse)
 
 # set dir
-current_dir <- getwd()
-project_dir <- current_dir %>% 
-  str_replace("src", "")
-data_dir <- paste(project_dir, "data/", sep = "")
+project_dir <- rprojroot::find_rstudio_root_file()
+data_dir <- paste(project_dir, "/data", sep = "")
 ```
 
 # preparing the data
-
 ## data sources
 ### import data
-```{r}
-data_weight <- read.csv(paste(data_dir, "weightLogInfo_merged.csv", sep = ""))
-glimpse(data_weight)
-head(data_weight)
-tail(data_weight)
+```{r db connect}
+# connect to server
+con <- RPostgreSQL::dbConnect(PostgreSQL(),
+                              dbname = "main",
+                              host = "localhost",
+                              port = 5433)
+
+table_names <- RPostgreSQL::dbListTables(con)
+query <- 'SElECT * FROM "dailyActivity"'
+daily_activity <- RPostgreSQL::dbGetQuery(con, query)
+
+print(glimpse(daily_activity))
+RPostgreSQL::dbDisconnect(con)
 ```
 
 ## data quality
