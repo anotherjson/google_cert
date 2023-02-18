@@ -43,3 +43,4 @@ rsconnect/
 google_cert.Rproj
 # ignore renv
 renv/
+renv.lock
